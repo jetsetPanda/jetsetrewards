@@ -26,7 +26,7 @@ export async function login(formData: FormData) {
     redirect("/login?error=1");
   }
   const token = await createSessionToken();
-  cookies().set(SESSION_COOKIE, token, {
+  (await cookies()).set(SESSION_COOKIE, token, {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
@@ -37,7 +37,7 @@ export async function login(formData: FormData) {
 }
 
 export async function logout() {
-  cookies().delete(SESSION_COOKIE);
+  (await cookies()).delete(SESSION_COOKIE);
   redirect("/login");
 }
 

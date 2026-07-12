@@ -1,10 +1,11 @@
 import { login } from "@/lib/actions";
 
-export default function LoginPage({
+export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: { error?: string };
+  searchParams: Promise<{ error?: string }>;
 }) {
+  const { error } = await searchParams;
   return (
     <div className="mx-auto mt-24 max-w-sm">
       <div className="panel">
@@ -26,7 +27,7 @@ export default function LoginPage({
               className="mt-1 w-full"
             />
           </div>
-          {searchParams.error && (
+          {error && (
             <p className="text-sm text-red-400">Wrong password, try again.</p>
           )}
           <button type="submit" className="btn-primary w-full">

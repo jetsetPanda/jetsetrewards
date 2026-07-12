@@ -18,9 +18,9 @@ export const dynamic = "force-dynamic";
 export default async function CardDetail({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const cardId = Number(params.id);
+  const cardId = Number((await params).id);
   const today = todayISO();
 
   const cardRows = await db
